@@ -2,93 +2,84 @@ Basic Rails Single Table Inheritance (STI).
 
 
 # Rails console samples
-mac = Mac.create owner: 'Alec'
-MightyMouse.create computer_id: mac.id, maker: 'Apple', model: 'MM1', scroller: 'awesome'
 
+Create one Basic:
 
-params = {
-  computer: {
-    type: 'Mac',
-    owner: 'Alec',
+    mac = Mac.create owner: 'Alec'
+    MightyMouse.create computer_id: mac.id, maker: 'Apple', model: 'MM1', scroller: 'awesome'
 
-    keyboard_attributes: {
-      maker: 'Logitech',
-      model: 'Lv101'
+Using first level accepts_nested_attributes for:
+
+    params = {
+      computer: {
+        type: 'Mac',
+        owner: 'Alec',
+        keyboard_attributes: {
+          maker: 'Logitech',
+          model: 'Lv101'
+        }
+      }
     }
-  }
-}
-Computer.create(params[:computer])
+    Computer.create(params[:computer])
 
+Another example:
 
-params = {
-  mac: {
-    owner: 'Tube',
-
-    keyboard_attributes: {
-      maker: 'Apple',
-      model: 'Silver'
+    params = {
+      mac: {
+        owner: 'V1',
+        mouse_attributes: {
+          type: 'MightyMouse',
+          maker: 'Apple',
+          model: 'Mighty1',
+          scroller: 'awesome'
+        }
+      }
     }
-  }
-}
-Mac.create(params[:mac])
-
-
-params = {
-  mac: {
-    owner: 'V1',
-
-    mouse_attributes: {
-      type: 'MightyMouse',
-      maker: 'Apple',
-      model: 'Mighty1',
-      scroller: 'awesome'
-    }
-  }
-}
-Mac.create(params[:mac])
+    Mac.create(params[:mac])
 
 # Now you can use this
-Mac.first
-Mac.first.class
-Mac.first.mouse
-Mac.first.mouse.class
+    Mac.first
+    Mac.first.class
+    Mac.first.mouse
+    Mac.first.mouse.class
 
 # Instead of doing this
-computer = Computer.first
-computer = computer.type.constantize.find(computer.id)
+    computer = Computer.first
+    computer = computer.type.constantize.find(computer.id)
 
-# If FormObjects work or enable relations in Computer model
-params = {
-  mac: {
-    owner: 'V1',
-
-    razer_attributes: {
-      maker: 'Razer',
-      model: 'Awesome Razer 2314',
-      buttons: 15
+# If you enable relations in Computer model or if my I could make FormObjects work
+    params = {
+      mac: {
+        owner: 'V1',
+        razer_attributes: {
+          maker: 'Razer',
+          model: 'Awesome Razer 2314',
+          buttons: 15
+        }
+      }
     }
-  }
-}
-Mac.create(params[:mac])
+    Mac.create(params[:mac])
 
-params = {
-  mac: {
-    owner: 'V1',
-
-    mighty_mouse_attributes: {
-      maker: 'Apple',
-      model: 'Mighty mighty mouse',
-      scroller: 'awesome'
+    params = {
+      mac: {
+        razer_attributes: {
+          model: 'Awesome Razer 1112',
+          buttons: 12
+        }
+      }
     }
-  }
-}
-Mac.first.update(params[:mac])
+    Mac.first.update(params[:mac])
 
-params = {
-  mac: {
-    razer_attributes: {
-      buttons: 12
+Another example
+
+    params = {
+      mac: {
+        owner: 'V1',
+        mighty_mouse_attributes: {
+          maker: 'Apple',
+          model: 'Mighty mighty mouse',
+          scroller: 'awesome'
+        }
+      }
     }
-  }
-}
-Mac.first.update(params[:mac])
+    Mac.first.update(params[:mac])
