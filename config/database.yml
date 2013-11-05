@@ -1,0 +1,7 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  reconnect: false
+  database: sti_development
+  pool: 5
+  host: localhost
