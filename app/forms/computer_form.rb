@@ -1,3 +1,6 @@
+# TODO:
+# Failed attempt. Would need to ask around rails for this one...
+
 class ComputerForm
   include ActiveModel::Model
 

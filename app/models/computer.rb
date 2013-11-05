@@ -6,13 +6,13 @@ class Computer < ActiveRecord::Base
   accepts_nested_attributes_for :mouse
   accepts_nested_attributes_for :keyboard
 
-  # Should be in FormObject maybe?
+  # TODO:
+  # Trying to make this work as FormObject maybe? Technically only used when in form creation right?
+  # Enable if you want to use nested_attributes
+  #
   # has_one :mighty_mouse
   # accepts_nested_attributes_for :mighty_mouse
   # 
   # has_one :razer
   # accepts_nested_attributes_for :razer
-
-  # mouse_attributes: {type: 'MightyMouse'}
-  # mighty_mouse_attributes: {}
 end
