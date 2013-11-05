@@ -8,6 +8,15 @@ Create one Basic:
     mac = Mac.create owner: 'Alec'
     MightyMouse.create computer_id: mac.id, maker: 'Apple', model: 'MM1', scroller: 'awesome'
 
+Another:
+
+    pc = Pc.create owner: 'Alice'
+
+When you try to list it down, it would know what the actual records are:
+
+    Computer.all
+    # => #<ActiveRecord::Relation [#<Mac id: 17, type: "Mac", owner: "Alec">, #<Pc id: 18, type: "Pc", owner: "Alice">]>
+
 Using first level accepts_nested_attributes for:
 
     params = {
